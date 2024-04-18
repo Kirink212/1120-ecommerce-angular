@@ -1,0 +1,25 @@
+<!-- <div *ngIf="booksList.length > 0; else emptyList">
+  <mat-card *ngFor="let book of booksList">
+    <mat-card-header>
+      <mat-card-title>{{ book.title }}</mat-card-title>
+      <mat-card-subtitle>{{ book.author }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{ book.description }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>COMPRAR</button>
+      <button mat-button>FAVORITAR</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<ng-template #emptyList><p>A lista de livros está vazia!</p></ng-template> -->
+
+@for(book of booksList; track book.id) {
+  <app-book-card [book]="book"></app-book-card>
+} @empty {
+  <p>A lista de livros está vazia!</p>
+}
