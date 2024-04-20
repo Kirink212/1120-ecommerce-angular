@@ -12,6 +12,8 @@ import { IBook } from '../../interfaces/book.interface';
   styleUrl: './books-catalog.component.css'
 })
 export class BooksCatalogComponent {
+  // booksList: Array<IBook>
+  teste: string = 'ABC';
   booksList: IBook[] = [
     {
       "id": 1,

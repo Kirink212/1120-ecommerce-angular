@@ -1,6 +1,17 @@
-<app-header></app-header>
+<app-header>
+  <button type="button" mat-icon-button (click)="drawer.toggle()">
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+</app-header>
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <app-books-cart></app-books-cart>
+  </mat-drawer>
+
+  <app-books-catalog></app-books-catalog>
+
+  <router-outlet />
+</mat-drawer-container>
 
 <!-- <h1>Hello, {{ title }}</h1> -->
-<app-books-catalog></app-books-catalog>
-
-<router-outlet />

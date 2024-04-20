@@ -19,7 +19,9 @@
 <ng-template #emptyList><p>A lista de livros está vazia!</p></ng-template> -->
 
 @for(book of booksList; track book.id) {
-  <app-book-card [book]="book"></app-book-card>
+  <app-book-card [book]="book" teste="teste"></app-book-card>
 } @empty {
   <p>A lista de livros está vazia!</p>
 }
+
+<app-book-card></app-book-card>
