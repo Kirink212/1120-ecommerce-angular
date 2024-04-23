@@ -1,1 +1,8 @@
-<p>books-cart works!</p>
+<mat-list>
+  @for(book of addedBooksList; track book.id) {
+    <mat-list-item>{{ book.title }} | {{ book.totalAddedToCart }}</mat-list-item>
+    <mat-divider></mat-divider>
+  } @empty {
+    <mat-list-item>Carrinho vazio!</mat-list-item>
+  }
+</mat-list>

@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 import { BookCardComponent } from '../../components/book-card/book-card.component';
 import { IBook } from '../../interfaces/book.interface';
@@ -12,6 +12,7 @@ import { IBook } from '../../interfaces/book.interface';
   styleUrl: './books-catalog.component.css'
 })
 export class BooksCatalogComponent {
+  @Output() addBookToCart: EventEmitter<IBook> = new EventEmitter();
   // booksList: Array<IBook>
   teste: string = 'ABC';
   booksList: IBook[] = [
@@ -21,7 +22,9 @@ export class BooksCatalogComponent {
       "author": "Thomas Harris",
       "description": "Um livro muito legal...",
       "published_date": new Date("1988-08-29"),
-      "price": 59.99
+      "price": 59.99,
+      "totalInStock": 20,
+      "totalAddedToCart": 0,
     },
     {
       "id": 2,
@@ -29,7 +32,9 @@ export class BooksCatalogComponent {
       "author": "J.K. Rowling",
       "description": "Um livro muito legal...",
       "published_date": new Date("1988-08-29"),
-      "price": 59.99
+      "price": 59.99,
+      "totalInStock": 20,
+      "totalAddedToCart": 0,
     },
     {
       "id": 3,
@@ -37,7 +42,9 @@ export class BooksCatalogComponent {
       "author": "George R.R. Martin",
       "description": "Um livro muito legal...",
       "published_date": new Date("1988-08-29"),
-      "price": 59.99
+      "price": 59.99,
+      "totalInStock": 20,
+      "totalAddedToCart": 0,
     },
     {
       "id": 4,
@@ -45,7 +52,15 @@ export class BooksCatalogComponent {
       "author": "James Clear",
       "description": "Um livro muito legal...",
       "published_date": new Date("1988-08-29"),
-      "price": 39.99
+      "price": 39.99,
+      "totalInStock": 20,
+      "totalAddedToCart": 0,
     },
-  ]
+  ];
+
+  warnAboutAddBookToCart(book: IBook){
+    console.log("Opa, clicou no botão de compra, né filhão?");
+    console.log(book);
+    this.addBookToCart.emit(book);
+  }
 }

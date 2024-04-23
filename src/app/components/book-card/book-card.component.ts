@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { MatCardModule } from '@angular/material/card';
 import { IBook } from '../../interfaces/book.interface';
@@ -14,6 +14,7 @@ import { IBook } from '../../interfaces/book.interface';
 export class BookCardComponent implements OnInit {
   @Input() book?: IBook;
   @Input() teste?: string;
+  @Output() addBookToCart: EventEmitter<void> = new EventEmitter();
 
   constructor() {
     // console.log(this.book);
@@ -26,6 +27,7 @@ export class BookCardComponent implements OnInit {
   }
 
   addToShoppingCart() {
+    this.addBookToCart.emit();
     console.log("Book added to cart successfully!");
   }
 }

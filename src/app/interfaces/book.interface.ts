@@ -5,6 +5,8 @@ export interface IBook {
   description: string;
   published_date: Date;
   price: number;
+  totalInStock: number;
+  totalAddedToCart: number;
 };
 
 type BookType = {
