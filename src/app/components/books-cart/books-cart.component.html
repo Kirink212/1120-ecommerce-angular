@@ -1,6 +1,10 @@
 <mat-list>
   @for(book of addedBooksList; track book.id) {
-    <mat-list-item>{{ book.title }} | {{ book.totalAddedToCart }}</mat-list-item>
+    <mat-list-item>
+      {{ book.title }} | {{ book.totalAddedToCart }}
+      <button mat-button color="warn" (click)="decrementTotalBookCopies(book)">-</button>
+      <button mat-button color="primary" (click)="incrementTotalBookCopies(book)">+</button>
+    </mat-list-item>
     <mat-divider></mat-divider>
   } @empty {
     <mat-list-item>Carrinho vazio!</mat-list-item>

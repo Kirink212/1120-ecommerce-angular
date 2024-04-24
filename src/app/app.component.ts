@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -28,28 +28,35 @@ import { IBook } from './interfaces/book.interface';
   // `,
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title: string = "it's me you're looking for...";
   addedBooksList: IBook[] = [];
 
+  ngOnInit() {
+    this.addedBooksList = JSON.parse(localStorage.getItem("addedBooksList") || "[]");
+  }
+
   findOrAddBook(book: IBook) {
+    // Checando se o livro que estou buscando já está no carrinho
     for (let i=0; i<this.addedBooksList.length; i++) {
-      if (book.id === this.addedBooksList[i].id) {
-        this.addedBooksList[i].totalAddedToCart++;
+      const currBook = this.addedBooksList[i];
+      if (book.id === currBook.id) {
+        currBook.totalAddedToCart = (book.totalAddedToCart < book.totalInStock)? currBook.totalAddedToCart + 1 : currBook.totalAddedToCart;
         return;
       }
     }
 
+    // Adicionando uma cópia de um novo livro ao carrinho
     book.totalAddedToCart = 1;
     this.addedBooksList.push(book);
   }
 
   addBookToCart(book: IBook) {
-    console.log("Deu bom, cria! O livro vai ser adicionado ao carrinho.");
+    // console.log("Deu bom, cria! O livro vai ser adicionado ao carrinho.");
 
     this.findOrAddBook(book);
     this.addedBooksList = [...this.addedBooksList]; // sobrescrevendo o array com uma cópia dele mesmo
 
-    console.log(this.addedBooksList);
+    // console.log(this.addedBooksList);
   }
 }

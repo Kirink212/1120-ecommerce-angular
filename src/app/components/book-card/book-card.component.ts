@@ -28,6 +28,6 @@ export class BookCardComponent implements OnInit {
 
   addToShoppingCart() {
     this.addBookToCart.emit();
-    console.log("Book added to cart successfully!");
+    // console.log("Book added to cart successfully!");
   }
 }

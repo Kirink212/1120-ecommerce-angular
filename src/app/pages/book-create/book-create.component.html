@@ -1,0 +1,43 @@
+<form>
+  <div>
+    <mat-form-field>
+      <mat-label>Título</mat-label>
+      <input matInput>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Autor</mat-label>
+      <input matInput>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Descrição</mat-label>
+      <textarea matInput></textarea>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Data de Lançamento</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Preço</mat-label>
+      <input  matInput type="number" placeholder="0">
+      <span matTextPrefix>$&nbsp;</span>
+      <span matTextSuffix>.00</span>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Quantidade em Estoque</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+  </div>
+</form>
