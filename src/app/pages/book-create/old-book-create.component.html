@@ -1,27 +1,27 @@
-<form [formGroup]="bookForm">
+<form>
   <div>
     <mat-form-field>
       <mat-label>Título</mat-label>
       <!-- <input matInput name="title" [value]="newBook.title" (input)="changeTitleValue($event)"> -->
-      <input matInput formControlName="title">
+      <input matInput name="title" [(ngModel)]="newBook.title">
     </mat-form-field>
   </div>
   <div>
     <mat-form-field>
       <mat-label>Autor</mat-label>
-      <input matInput formControlName="author">
+      <input matInput name="author" [(ngModel)]="newBook.author">
     </mat-form-field>
   </div>
   <div>
     <mat-form-field>
       <mat-label>Descrição</mat-label>
-      <textarea matInput formControlName="description"></textarea>
+      <textarea matInput name="description" [(ngModel)]="newBook.description"></textarea>
     </mat-form-field>
   </div>
   <div>
     <mat-form-field>
       <mat-label>Data de Lançamento</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="published_date" >
+      <input matInput [matDatepicker]="picker" name="published_date" [(ngModel)]="newBook.published_date">
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -30,7 +30,7 @@
   <div>
     <mat-form-field>
       <mat-label>Preço</mat-label>
-      <input  matInput type="number" placeholder="0" formControlName="price">
+      <input  matInput type="number" placeholder="0" name="price" [(ngModel)]="newBook.price">
       <span matTextPrefix>$&nbsp;</span>
       <span matTextSuffix>.00</span>
     </mat-form-field>
@@ -38,7 +38,7 @@
   <div>
     <mat-form-field>
       <mat-label>Quantidade em Estoque</mat-label>
-      <input matInput type="number" formControlName="totalInStock">
+      <input matInput type="number" name="totalInStock" [(ngModel)]="newBook.totalInStock">
     </mat-form-field>
   </div>
 

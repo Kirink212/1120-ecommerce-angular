@@ -9,9 +9,10 @@
     <app-books-cart [booksList]="addedBooksList"></app-books-cart>
   </mat-drawer>
 
-  <!-- <app-books-catalog (addBookToCart)="addBookToCart($event)"></app-books-catalog> -->
+  <app-books-catalog (addBookToCart)="addBookToCart($event)"></app-books-catalog>
 
-  <router-outlet />
+  <app-book-create />
+  <!-- <router-outlet /> -->
 </mat-drawer-container>
 
 <!-- <h1>Hello, {{ title }}</h1> -->

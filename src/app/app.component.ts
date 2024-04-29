@@ -7,6 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent } from './components/header/header.component';
 import { BooksCatalogComponent } from './pages/books-catalog/books-catalog.component';
 import { BooksCartComponent } from './components/books-cart/books-cart.component';
+import { BookCreateComponent } from './pages/book-create/book-create.component';
+
 import { IBook } from './interfaces/book.interface';
 
 @Component({
@@ -18,7 +20,8 @@ import { IBook } from './interfaces/book.interface';
     MatIconModule,
     HeaderComponent,
     BooksCatalogComponent,
-    BooksCartComponent
+    BooksCartComponent,
+    BookCreateComponent
   ],
   templateUrl: './app.component.html',
   // template: `

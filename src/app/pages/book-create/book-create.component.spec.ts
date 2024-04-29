@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BookCreateComponent } from './book-create.component';
+import { BookCreateComponent } from './old-book-create.component';
 
 describe('BookCreateComponent', () => {
   let component: BookCreateComponent;
@@ -11,7 +11,7 @@ describe('BookCreateComponent', () => {
       imports: [BookCreateComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(BookCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
