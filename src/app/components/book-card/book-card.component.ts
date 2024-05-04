@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { MatCardModule } from '@angular/material/card';
 import { IBook } from '../../interfaces/book.interface';
+import { BooksCartService } from '../../services/books-cart.service';
 
 @Component({
   selector: 'app-book-card',
@@ -18,33 +19,19 @@ export class BookCardComponent implements OnInit {
 
   addedBooksList: IBook[] = [];
 
-  ngOnInit() {
-    this.addedBooksList = JSON.parse(localStorage.getItem("addedBooksList") || "[]");
+  constructor(private booksCartSevice: BooksCartService) {
+
   }
 
-  findOrAddBook(book?: IBook) {
-    // Checando se o livro que estou buscando já está no carrinho
-    for (let i=0; i<this.addedBooksList.length; i++) {
-      const currBook = this.addedBooksList[i];
-      if (book?.id === currBook.id) {
-        currBook.totalAddedToCart = (book.totalAddedToCart < book.totalInStock)? currBook.totalAddedToCart + 1 : currBook.totalAddedToCart;
-        return;
-      }
-    }
-
-    // Adicionando uma cópia de um novo livro ao carrinho
-    if (book) {
-      book.totalAddedToCart = 1;
-      this.addedBooksList.push(book);
-    }
+  ngOnInit() {
+    this.addedBooksList = this.booksCartSevice.getAllBooks();
   }
 
   addToShoppingCart() {
     this.addBookToCart.emit();
 
-    this.findOrAddBook(this.book)
-
-    localStorage.setItem("addedBooksList", JSON.stringify(this.addedBooksList));
+    console.log(this.book);
+    this.booksCartSevice.findOrAddBook(this.book);
     // console.log("Book added to cart successfully!");
   }
 }

@@ -3,6 +3,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { BookCardComponent } from '../../components/book-card/book-card.component';
 import { IBook } from '../../interfaces/book.interface';
+import { BooksCatalogService } from '../../services/books-catalog.service';
 
 @Component({
   selector: 'app-books-catalog',
@@ -17,8 +18,12 @@ export class BooksCatalogComponent implements OnInit {
   teste: string = 'ABC';
   booksList: IBook[] = [];
 
+  constructor(private booksCatalogService: BooksCatalogService) {
+
+  }
+
   ngOnInit() {
-    this.booksList = JSON.parse(localStorage.getItem("booksList") || "[]");
+    this.booksList = this.booksCatalogService.getAllBooks();
   }
 
   warnAboutAddBookToCart(book: IBook){

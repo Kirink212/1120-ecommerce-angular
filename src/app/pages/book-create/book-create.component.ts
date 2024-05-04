@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { IBook } from '../../interfaces/book.interface';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { BooksCatalogService } from '../../services/books-catalog.service';
 
 @Component({
   selector: 'app-book-create',
@@ -16,11 +17,11 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './book-create.component.html',
   styleUrl: './book-create.component.css'
 })
-export class BookCreateComponent implements OnInit {
+export class BookCreateComponent {
   booksList: IBook[] = [];
   bookForm: FormGroup;
 
-  constructor() {
+  constructor(private booksCatalogService: BooksCatalogService) {
     this.bookForm = new FormGroup({
       title: new FormControl("Título padrão"),
       author: new FormControl(),
@@ -31,10 +32,6 @@ export class BookCreateComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.booksList = JSON.parse(localStorage.getItem("booksList") || "[]");
-  }
-
   // changeTitleValue(event: Event) {
   //   const target = event.target as HTMLInputElement;
   //   this.newBook.title = target.value;
@@ -43,7 +40,6 @@ export class BookCreateComponent implements OnInit {
 
   submitForm() {
     const newBook: IBook = this.bookForm.value;
-    this.booksList.push(newBook);
-    localStorage.setItem("booksList", JSON.stringify(this.booksList));
+    this.booksCatalogService.createBook(newBook);
   }
 }
