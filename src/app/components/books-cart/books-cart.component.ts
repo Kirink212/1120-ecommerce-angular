@@ -30,7 +30,6 @@ export class BooksCartComponent implements OnInit {
     const $addedBooksList = this.booksCartApiSevice.getAllBooks();
     $addedBooksList.subscribe((addedBooksList) => {
       this.addedBooksList = addedBooksList;
-      console.log(this.addedBooksList);
     });
 
     // this.addedBooksList = this.booksCartApiSevice.getAllBooks();
@@ -43,12 +42,12 @@ export class BooksCartComponent implements OnInit {
   // }
 
   incrementTotalBookCopies(book: IBook) {
-    this.booksCartSevice.incrementTotalBookCopies(book.id);
+    this.booksCartSevice.incrementTotalBookCopies(book._id);
     this.addedBooksList = this.booksCartSevice.getAllBooks();
   }
 
   decrementTotalBookCopies(book: IBook) {
-    this.booksCartSevice.decrementTotalBookCopies(book.id);
+    this.booksCartSevice.decrementTotalBookCopies(book._id);
     this.addedBooksList = this.booksCartSevice.getAllBooks();
   }
 }

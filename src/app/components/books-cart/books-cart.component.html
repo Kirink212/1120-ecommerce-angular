@@ -1,5 +1,5 @@
 <mat-list>
-  @for(book of addedBooksList; track book.id) {
+  @for(book of addedBooksList; track book._id) {
     <mat-list-item>
       {{ book.title }} | {{ book.totalAddedToCart }}
       <button mat-button color="warn" (click)="decrementTotalBookCopies(book)">-</button>

@@ -20,7 +20,7 @@ export class BooksCartService {
     // Checando se o livro que estou buscando já está no carrinho
     for (let i=0; i<this.addedBooksList.length; i++) {
       const currBook = this.addedBooksList[i];
-      if (book?.id === currBook.id) {
+      if (book?._id === currBook._id) {
         currBook.totalAddedToCart = (currBook.totalAddedToCart < currBook.totalInStock)? currBook.totalAddedToCart + 1 : currBook.totalAddedToCart;
         localStorage.setItem("addedBooksList", JSON.stringify(this.addedBooksList));
         return;
@@ -38,7 +38,7 @@ export class BooksCartService {
 
   findBookIndexById(bookId: string){
     const bookIndex = this.addedBooksList.findIndex((currBook) => {
-      return currBook.id === bookId;
+      return currBook._id === bookId;
     });
 
     return bookIndex;

@@ -18,7 +18,7 @@ export class BooksCatalogService {
   }
 
   createBook(book: IBook) {
-    book.id = uuidv4();
+    book._id = uuidv4();
     this.booksList.push(book);
     localStorage.setItem("booksList", JSON.stringify(this.booksList));
   }

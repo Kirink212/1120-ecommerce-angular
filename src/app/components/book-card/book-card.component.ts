@@ -4,6 +4,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { IBook } from '../../interfaces/book.interface';
 import { BooksCartService } from '../../services/books-cart.service';
+import { BooksCartApiService } from './../../services/books-cart-api.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-book-card',
@@ -13,13 +15,17 @@ import { BooksCartService } from '../../services/books-cart.service';
   styleUrl: './book-card.component.css'
 })
 export class BookCardComponent implements OnInit {
-  @Input() book?: IBook;
-  @Input() teste?: string;
-  @Output() addBookToCart: EventEmitter<void> = new EventEmitter();
+  // @Input() book?: IBook;
+  // @Input() teste?: string;
+  // @Output() addBookToCart: EventEmitter<void> = new EventEmitter();
 
+  @Input() book?: IBook;
   addedBooksList: IBook[] = [];
 
-  constructor(private booksCartSevice: BooksCartService) {
+  constructor(
+    private booksCartSevice: BooksCartService,
+    private booksCartApiService: BooksCartApiService
+  ) {
 
   }
 
@@ -28,10 +34,12 @@ export class BookCardComponent implements OnInit {
   }
 
   addToShoppingCart() {
-    this.addBookToCart.emit();
+    this.booksCartApiService.addOrUpdateBookFromCart(this.book);
 
-    console.log(this.book);
-    this.booksCartSevice.findOrAddBook(this.book);
+    // this.addBookToCart.emit();
+
+    // console.log(this.book);
+    // this.booksCartSevice.findOrAddBook(this.book);
     // console.log("Book added to cart successfully!");
   }
 }
