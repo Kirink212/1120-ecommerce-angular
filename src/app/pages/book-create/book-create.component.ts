@@ -5,8 +5,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { IBook } from '../../interfaces/book.interface';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+
+import { IBook } from '../../interfaces/book.interface';
 import { BooksCatalogService } from '../../services/books-catalog.service';
 
 @Component({
@@ -18,18 +20,26 @@ import { BooksCatalogService } from '../../services/books-catalog.service';
   styleUrl: './book-create.component.css'
 })
 export class BookCreateComponent {
+  private bookId: string;
+  bookToUpdate?: IBook;
   booksList: IBook[] = [];
   bookForm: FormGroup;
 
-  constructor(private booksCatalogService: BooksCatalogService) {
+  constructor(private booksCatalogService: BooksCatalogService, private route: ActivatedRoute) {
+    this.bookId = this.route.snapshot.params["id"];
+
+    this.bookToUpdate = this.booksCatalogService.getBookById(this.bookId);
+    console.log(this.bookToUpdate);
+
     this.bookForm = new FormGroup({
-      title: new FormControl("Título padrão"),
-      author: new FormControl(),
-      description: new FormControl(),
-      published_date: new FormControl(),
-      price: new FormControl(),
-      totalInStock: new FormControl()
+      title: new FormControl(this.bookToUpdate?.title || "Título Padrão"),
+      author: new FormControl(this.bookToUpdate?.author || "Nome do Autor"),
+      description: new FormControl(this.bookToUpdate?.description),
+      published_date: new FormControl(this.bookToUpdate?.published_date),
+      price: new FormControl(this.bookToUpdate?.price),
+      totalInStock: new FormControl(this.bookToUpdate?.totalInStock)
     });
+
   }
 
   // changeTitleValue(event: Event) {

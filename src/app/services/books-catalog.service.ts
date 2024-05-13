@@ -17,9 +17,19 @@ export class BooksCatalogService {
     return JSON.parse(localStorage.getItem("booksList") || "[]");
   }
 
+  getBookById(bookId: string) {
+    return this.booksList.find((b) => b._id == bookId);
+  }
+
   createBook(book: IBook) {
     book._id = uuidv4();
     this.booksList.push(book);
+    localStorage.setItem("booksList", JSON.stringify(this.booksList));
+  }
+
+  updateBook(book: IBook) {
+    const index = this.booksList.findIndex((b) => b._id == book._id);
+    this.booksList[index] = book;
     localStorage.setItem("booksList", JSON.stringify(this.booksList));
   }
 }
