@@ -32,4 +32,10 @@ export class BooksCatalogService {
     this.booksList[index] = book;
     localStorage.setItem("booksList", JSON.stringify(this.booksList));
   }
+
+  deleteBook(bookId: string) {
+    const index = this.booksList.findIndex((b) => b._id == bookId);
+    this.booksList.splice(index, 1);
+    localStorage.setItem("booksList", JSON.stringify(this.booksList));
+  }
 }

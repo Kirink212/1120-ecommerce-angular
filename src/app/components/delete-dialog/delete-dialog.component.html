@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Remover Livro</h2>
+<mat-dialog-content>
+  <p>Você tem certeza que deseja remover esse livro?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Não</button>
+  <button mat-button (click)="removeFromCatalog()" cdkFocusInitial>Sim</button>
+</mat-dialog-actions>

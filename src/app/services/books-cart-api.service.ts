@@ -9,7 +9,7 @@ import { BehaviorSubject, filter, map } from 'rxjs';
 export class BooksCartApiService {
   private booksSubject = new BehaviorSubject<IBook[]>([]);
   booksList$ = this.booksSubject.asObservable();
-  API_URL: string = "https://crudcrud.com/api/be8529523403462289058a866dd6dc4e/cart";
+  API_URL: string = "https://crudcrud.com/api/d05796a659bf464491a6790029e72284/cart";
 
   constructor(private http: HttpClient) {
     this.getAllBooks();
@@ -47,6 +47,7 @@ export class BooksCartApiService {
 
     this.getBookByCatalogId(book._id)
       .subscribe((foundBook?: IBook) => {
+        console.log(foundBook);
         if (!foundBook) {
           book.totalAddedToCart = 1;
           this.addBookToCart(book).subscribe((book: IBook) => {
@@ -58,7 +59,7 @@ export class BooksCartApiService {
         }
 
         foundBook.totalAddedToCart = (foundBook.totalAddedToCart < foundBook.totalInStock)? foundBook.totalAddedToCart + 1 : foundBook.totalAddedToCart;
-        this.updateBookOnCart(book).subscribe(() => {
+        this.updateBookOnCart(foundBook).subscribe(() => {
           const booksList = this.booksSubject.getValue();
           const index = booksList.findIndex((b) => b._id == foundBook._id);
           booksList[index] = foundBook;
@@ -71,6 +72,8 @@ export class BooksCartApiService {
 
   addBookToCart(book: IBook) {
     const { _id: bookId, ...bookNoId } = book;
+    bookNoId.catalog_id = bookId;
+
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8');
     return this.http.post<IBook>(this.API_URL, bookNoId, { headers });

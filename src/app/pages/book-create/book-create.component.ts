@@ -6,7 +6,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { IBook } from '../../interfaces/book.interface';
 import { BooksCatalogService } from '../../services/books-catalog.service';
@@ -25,7 +25,11 @@ export class BookCreateComponent {
   booksList: IBook[] = [];
   bookForm: FormGroup;
 
-  constructor(private booksCatalogService: BooksCatalogService, private route: ActivatedRoute) {
+  constructor(
+    private booksCatalogService: BooksCatalogService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.bookId = this.route.snapshot.params["id"];
 
     this.bookToUpdate = this.booksCatalogService.getBookById(this.bookId);
@@ -49,7 +53,17 @@ export class BookCreateComponent {
   // }
 
   submitForm() {
-    const newBook: IBook = this.bookForm.value;
-    this.booksCatalogService.createBook(newBook);
+    let bookData: IBook = this.bookForm.value;
+
+    if (this.bookId) {
+      bookData = {...bookData, _id: this.bookId};
+      this.booksCatalogService.updateBook(bookData);
+
+      this.router.navigate(['/']);
+      return;
+    }
+
+    this.router.navigate(['/']);
+    this.booksCatalogService.createBook(bookData);
   }
 }
