@@ -17,7 +17,7 @@
 @if(book) {
   <mat-card>
     <mat-card-header>
-      <mat-card-title>{{ book.title }}</mat-card-title>
+      <mat-card-title><a [routerLink]="getUpdateLink()">{{ book.title }}</a></mat-card-title>
       <mat-card-subtitle>{{ book.author }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>

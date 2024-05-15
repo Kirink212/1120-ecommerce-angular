@@ -10,6 +10,7 @@ export class BooksCatalogService {
   booksList: IBook[] = [];
 
   constructor() {
+    console.log("Eu estou sendo executado!");
     this.booksList = this.getAllBooks();
   }
 

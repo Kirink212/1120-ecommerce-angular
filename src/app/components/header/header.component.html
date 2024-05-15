@@ -1,5 +1,12 @@
 <mat-toolbar class="header-space">
   <div><span>Books E-Commerce</span></div>
 
-  <div><ng-content></ng-content></div>
+  <div class="navigation">
+    <div>
+      <a mat-button routerLink="/" >Books Catalog</a>
+      <a mat-button routerLink="/books/create" target="_blank">Create New Book</a>
+    </div>
+
+    <div><ng-content></ng-content></div>
+  </div>
 </mat-toolbar>

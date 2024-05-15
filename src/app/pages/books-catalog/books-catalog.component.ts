@@ -4,11 +4,12 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BookCardComponent } from '../../components/book-card/book-card.component';
 import { IBook } from '../../interfaces/book.interface';
 import { BooksCatalogService } from '../../services/books-catalog.service';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-books-catalog',
   standalone: true,
-  imports: [ NgFor, NgIf, BookCardComponent ],
+  imports: [ NgFor, NgIf, BookCardComponent, RouterOutlet ],
   templateUrl: './books-catalog.component.html',
   styleUrl: './books-catalog.component.css'
 })

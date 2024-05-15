@@ -9,11 +9,12 @@ import { BooksCartApiService } from './../../services/books-cart-api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-book-card',
   standalone: true,
-  imports: [ NgIf, MatCardModule, MatButtonModule ],
+  imports: [ NgIf, MatCardModule, MatButtonModule, RouterModule ],
   templateUrl: './book-card.component.html',
   styleUrl: './book-card.component.css'
 })
@@ -51,5 +52,9 @@ export class BookCardComponent implements OnInit {
     this.dialog.open(DeleteDialogComponent, {
       data: { bookId: this.book?._id }
     });
+  }
+
+  getUpdateLink() {
+    return `/books/update/${this.book?._id}`;
   }
 }
