@@ -1,9 +1,13 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +27,10 @@ export class LoginComponent {
   emailError: string = "";
   passwordError: string = "";
 
-  constructor() {
+  constructor(
+    private authService: AuthService,
+    private snackBar: MatSnackBar
+  ) {
     this.loginForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required])
@@ -51,6 +58,21 @@ export class LoginComponent {
   }
 
   submitForm() {
-    console.log(this.loginForm.valid);
+    console.log("Cliquei no botão do forms!");
+    if (this.loginForm.valid) {
+      const loggedIn = this.authService.loginUser(this.loginForm.value);
+
+      if (!loggedIn) {
+        this.snackBar.open(
+          "Não foi possível logar. Tente novamente com credenciais válidas!",
+          "Close",
+          {
+            horizontalPosition: "end",
+            verticalPosition: "top",
+            duration: 5000,
+          }
+        )
+      }
+    }
   }
 }

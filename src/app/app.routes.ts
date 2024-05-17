@@ -4,6 +4,7 @@ import { BooksCatalogComponent } from './pages/books-catalog/books-catalog.compo
 import { BookCreateComponent } from './pages/book-create/book-create.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { LoginComponent } from './pages/login/login.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -14,8 +15,8 @@ export const routes: Routes = [
     //   { path: 'update/:id', component: BookCreateComponent },
     // ]
   },
-  { path: 'books/create', component: BookCreateComponent },
-  { path: 'books/update/:id', component: BookCreateComponent },
+  { path: 'books/create', component: BookCreateComponent, canActivate: [authGuard] },
+  { path: 'books/update/:id', component: BookCreateComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: "books", pathMatch: "full" },
   { path: "**", component: PageNotFoundComponent },

@@ -27,7 +27,9 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-button color="primary" (click)="addToShoppingCart()">COMPRAR</button>
-      <button mat-button color="warn" (click)="removeFromCatalog()">REMOVER</button>
+      @if (loggedUser) {
+        <button mat-button color="warn" (click)="removeFromCatalog()">REMOVER</button>
+      }
     </mat-card-actions>
   </mat-card>
 }
