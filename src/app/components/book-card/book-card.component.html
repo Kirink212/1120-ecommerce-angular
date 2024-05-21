@@ -18,11 +18,19 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title><a [routerLink]="getUpdateLink()">{{ book.title }}</a></mat-card-title>
-      <mat-card-subtitle>{{ book.author }}</mat-card-subtitle>
+      <!-- <mat-card-subtitle>{{ book.author }}</mat-card-subtitle> -->
+      <mat-card-subtitle>{{ book.author | citation }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p>
         {{ book.description }}
+      </p>
+      <p>
+        {{ book.published_date | date: "dd/MM/yyyy" }}
+      </p>
+      <p>
+        <!-- R${{ book.price }},00 -->
+        {{ book.price | currency: "BRL" }}
       </p>
     </mat-card-content>
     <mat-card-actions>

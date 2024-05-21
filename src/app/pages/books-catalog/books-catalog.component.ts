@@ -24,7 +24,7 @@ export class BooksCatalogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.booksList = this.booksCatalogService.getAllBooks();
+    this.booksList = this.booksCatalogService.booksList();
   }
 
   warnAboutAddBookToCart(book: IBook){

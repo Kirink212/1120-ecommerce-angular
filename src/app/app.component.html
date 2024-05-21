@@ -7,7 +7,15 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <!-- <app-books-cart [booksList]="addedBooksList"></app-books-cart> -->
-    <app-books-cart />
+    @defer {
+      <app-books-cart />
+    } @placeholder (minimum 5000ms) {
+      <p>Ainda não foi "deferido"</p>
+    } @loading {
+      <p>Estou sendo mostrado, pois o conteúdo do carrinho ainda está carregando...</p>
+    } @error {
+      <p>Erro no carregamento do catálogo de livros</p>
+    }
   </mat-drawer>
 
   <!-- <app-books-catalog (addBookToCart)="addBookToCart($event)"></app-books-catalog>

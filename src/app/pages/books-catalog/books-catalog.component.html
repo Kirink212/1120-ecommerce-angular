@@ -17,12 +17,12 @@
 </div>
 
 <ng-template #emptyList><p>A lista de livros está vazia!</p></ng-template> -->
-
 @for(book of booksList; track book._id) {
   <app-book-card [book]="book" teste="teste" (addBookToCart)="warnAboutAddBookToCart(book)"></app-book-card>
 } @empty {
   <p>A lista de livros está vazia!</p>
 }
+
 
 <app-book-card></app-book-card>
 <!-- <router-outlet /> -->
